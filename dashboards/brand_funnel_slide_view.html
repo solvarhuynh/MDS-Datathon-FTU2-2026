@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slide 8 — Brand Funnel Analysis</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cozy-green: #2ECC71;
+    --cozy-yellow: #F4D03F;
+    --cozy-green-dark: #1A9E52;
+    --cozy-yellow-dark: #D4AC0D;
+    --cozy-green-light: #EAFAF1;
+    --cozy-yellow-light: #FEFDE8;
+    --grey-50: #F9FAFB;
+    --grey-100: #F3F4F6;
+    --grey-200: #E5E7EB;
+    --grey-400: #9CA3AF;
+    --grey-600: #4B5563;
+    --grey-800: #1F2937;
+    --competitor: #CBD5E1;
+    --competitor-dark: #94A3B8;
+    --white: #FFFFFF;
+    --red: #EF4444;
+    --orange: #F97316;
+  }
+
+  body {
+    background: #FFFFFF;
+    font-family: 'Barlow', sans-serif;
+    color: var(--grey-800);
+    min-height: 100vh;
+    padding: 32px 40px;
+  }
+
+  /* ── HEADER ── */
+  .slide-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 28px;
+    border-bottom: 3px solid var(--grey-100);
+    padding-bottom: 18px;
+  }
+  .slide-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: var(--grey-400);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .slide-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--grey-800);
+    line-height: 1.1;
+  }
+  .slide-title span {
+    color: var(--cozy-green-dark);
+  }
+  .key-question {
+    font-size: 13px;
+    color: var(--grey-600);
+    margin-top: 5px;
+    font-style: italic;
+  }
+  .legend {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-shrink: 0;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 12px;
+    color: var(--grey-600);
+    font-weight: 500;
+  }
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+
+  /* ── MAIN LAYOUT ── */
+  .main-grid {
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 28px;
+    margin-bottom: 24px;
+  }
+
+  /* ── FUNNEL SECTION ── */
+  .funnel-card {
+    background: var(--white);
+    border: 1.5px solid var(--grey-200);
+    border-radius: 12px;
+    padding: 20px 18px;
+  }
+  .card-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--grey-400);
+    margin-bottom: 16px;
+  }
+
+  /* Funnel SVG area */
+  .funnel-wrapper {
+    position: relative;
+  }
+  .funnel-stage {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+    gap: 10px;
+  }
+  .funnel-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--grey-600);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: 100px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+  .funnel-bars {
+    flex: 1;
+    position: relative;
+  }
+  .funnel-bar-bg {
+    height: 36px;
+    background: var(--grey-100);
+    border-radius: 4px;
+    position: relative;
+    overflow: visible;
+  }
+  .funnel-bar-cozy {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    transition: width 0.6s ease;
+  }
+  .funnel-bar-value {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: white;
+    white-space: nowrap;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  }
+  /* Competitor dots row */
+  .comp-row {
+    display: flex;
+    gap: 4px;
+    margin-top: 3px;
+    padding-left: 110px;
+    flex-wrap: wrap;
+  }
+  .comp-chip {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: var(--grey-100);
+    color: var(--grey-600);
+    border: 1px solid var(--grey-200);
+  }
+
+  /* Arrow between stages */
+  .funnel-conversion {
+    display: flex;
+    align-items: center;
+    margin: 0 0 2px 110px;
+    gap: 6px;
+  }
+  .conv-arrow {
+    font-size: 10px;
+    color: var(--grey-400);
+  }
+  .conv-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 1px 8px;
+    border-radius: 10px;
+  }
+  .conv-good { background: #DCFCE7; color: #166534; }
+  .conv-ok   { background: #FEF9C3; color: #854D0E; }
+  .conv-bad  { background: #FEE2E2; color: #991B1B; }
+
+  /* ── COMPARISON TABLE ── */
+  .comparison-card {
+    background: var(--white);
+    border: 1.5px solid var(--grey-200);
+    border-radius: 12px;
+    padding: 20px 18px;
+  }
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .comp-table th {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--grey-400);
+    padding: 6px 10px;
+    text-align: center;
+    border-bottom: 2px solid var(--grey-100);
+  }
+  .comp-table th:first-child { text-align: left; }
+  .comp-table td {
+    padding: 7px 10px;
+    text-align: center;
+    border-bottom: 1px solid var(--grey-100);
+    font-weight: 500;
+    font-size: 13px;
+    color: var(--grey-600);
+  }
+  .comp-table td:first-child {
+    text-align: left;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .row-cozy td { background: #F0FDF4; }
+  .row-cozy td:first-child { color: var(--cozy-green-dark); }
+
+  .val-cell {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+  }
+  .val-cozy-green { color: var(--cozy-green-dark); }
+  .val-cozy-yellow { color: #B45309; }
+  .val-red { color: var(--red); }
+  .val-grey { color: var(--grey-400); }
+
+  .stage-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 5px;
+  }
+
+  /* Bottleneck highlight */
+  .bottleneck-cell {
+    background: #FEE2E2 !important;
+    border-radius: 4px;
+  }
+  .bottleneck-label {
+    font-size: 9px;
+    color: var(--red);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: block;
+  }
+
+  /* ── BOTTOM ROW: Insight + Barriers + Action ── */
+  .bottom-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+  .insight-card {
+    border-radius: 10px;
+    padding: 16px;
+    border: 1.5px solid;
+  }
+  .insight-card.bottleneck {
+    border-color: #FECACA;
+    background: #FFF5F5;
+  }
+  .insight-card.root-cause {
+    border-color: #FDE68A;
+    background: #FFFBEB;
+  }
+  .insight-card.action {
+    border-color: #BBF7D0;
+    background: #F0FDF4;
+  }
+  .insight-header {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .insight-header.bottleneck { color: var(--red); }
+  .insight-header.root-cause { color: #92400E; }
+  .insight-header.action { color: var(--cozy-green-dark); }
+  .insight-icon {
+    font-size: 14px;
+  }
+  .insight-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    align-items: flex-start;
+  }
+  .insight-bullet {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 5px;
+  }
+  .bullet-red { background: var(--red); }
+  .bullet-yellow { background: var(--cozy-yellow-dark); }
+  .bullet-green { background: var(--cozy-green-dark); }
+  .insight-text {
+    font-size: 12px;
+    line-height: 1.45;
+    color: var(--grey-800);
+  }
+  .insight-text strong {
+    font-weight: 700;
+  }
+
+  /* Barrier mini chart */
+  .barrier-bar-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+  .barrier-name {
+    font-size: 11px;
+    color: var(--grey-600);
+    width: 130px;
+    flex-shrink: 0;
+    line-height: 1.3;
+  }
+  .barrier-track {
+    flex: 1;
+    height: 14px;
+    background: var(--grey-100);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .barrier-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: #F97316;
+  }
+  .barrier-pct {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--grey-800);
+    width: 32px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+
+  .action-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--cozy-green);
+    margin-right: 6px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .cozy-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--cozy-green), var(--cozy-yellow));
+    color: white;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 10px;
+    border-radius: 20px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="slide-header">
+  <div>
+    <div class="slide-number">Slide 08 · Brand Health Tracking 2025</div>
+    <div class="slide-title">Brand Funnel Analysis — <span>Where Does Cozy Lose Consumers?</span></div>
+    <div class="key-question">Awareness → Spontaneous → Consideration → P3M → P4W (Recent Usage) → BUMO</div>
+  </div>
+  <div style="display:flex; flex-direction:column; align-items:flex-end; gap:10px;">
+    <span class="cozy-tag">🍵 Cozy Focus</span>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background: var(--cozy-green);"></div>Cozy</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--grey-400);"></div>Competitors</div>
+      <div class="legend-item"><div class="legend-dot" style="background: var(--red);"></div>Bottleneck</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN GRID -->
+<div class="main-grid">
+
+  <!-- LEFT: FUNNEL CHART -->
+  <div class="funnel-card">
+    <div class="card-label">Cozy Brand Funnel · % of Respondents</div>
+
+    <!-- Stage: Total Aware -->
+    <div class="funnel-stage">
+      <div class="funnel-label">Total Aware</div>
+      <div class="funnel-bars">
+        <div class="funnel-bar-bg">
+          <div class="funnel-bar-cozy" style="width:91.8%; background: linear-gradient(90deg, #1A9E52, #2ECC71);">
+            <span class="funnel-bar-value">91.8%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <span class="comp-chip">C2 97.2%</span>
+      <span class="comp-chip">OLong 98.8%</span>
+      <span class="comp-chip">KĐ 92.5%</span>
+      <span class="comp-chip">Dr.T 73.1%</span>
+    </div>
+
+    <!-- Conversion arrow -->
+    <div class="funnel-conversion" style="margin-top:6px;">
+      <span class="conv-arrow">↓</span>
+      <span class="conv-badge conv-bad">Spon: 43.1%</span>
+      <span style="font-size:11px; color:var(--grey-400);">Aware → Spontaneous</span>
+    </div>
+
+    <!-- Stage: Spontaneous Aware -->
+    <div class="funnel-stage" style="margin-top:4px;">
+      <div class="funnel-label">Spontaneous</div>
+      <div class="funnel-bars">
+        <div class="funnel-bar-bg">
+          <div class="funnel-bar-cozy" style="width:39.6%; background: linear-gradient(90deg, #1A9E52, #2ECC71);">
+            <span class="funnel-bar-value">39.6%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <span class="comp-chip">C2 78.9%</span>
+      <span class="comp-chip">OLong 75.7%</span>
+      <span class="comp-chip">KĐ 54.2%</span>
+    </div>
+
+    <!-- Conversion arrow -->
+    <div class="funnel-conversion" style="margin-top:6px;">
+      <span class="conv-arrow">↓</span>
+      <span class="conv-badge conv-bad" style="background:#FEE2E2; color:#991B1B; border: 1.5px solid #FECACA;">⚠ Consid: 37.8%</span>
+      <span style="font-size:11px; color:var(--red); font-weight:600;">← KEY BOTTLENECK</span>
+    </div>
+
+    <!-- Stage: Consideration -->
+    <div class="funnel-stage" style="margin-top:4px;">
+      <div class="funnel-label" style="color:var(--red);">Consideration</div>
+      <div class="funnel-bars">
+        <div class="funnel-bar-bg" style="background:#FEE2E2;">
+          <div class="funnel-bar-cozy" style="width:34.7%; background: linear-gradient(90deg, #DC2626, #EF4444);">
+            <span class="funnel-bar-value">34.7%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <span class="comp-chip" style="color:#374151; background:#F1F5F9;">C2 75.8%</span>
+      <span class="comp-chip" style="color:#374151; background:#F1F5F9;">OLong 74.8%</span>
+      <span class="comp-chip" style="color:#374151; background:#F1F5F9;">KĐ 61.2%</span>
+    </div>
+
+    <!-- Conversion arrow -->
+    <div class="funnel-conversion" style="margin-top:6px;">
+      <span class="conv-arrow">↓</span>
+      <span class="conv-badge conv-ok">P3M: 95.7%</span>
+      <span style="font-size:11px; color:var(--grey-400);">Consideration → P3M</span>
+    </div>
+
+    <!-- Stage: P3M -->
+    <div class="funnel-stage" style="margin-top:4px;">
+      <div class="funnel-label">P3M Usage</div>
+      <div class="funnel-bars">
+        <div class="funnel-bar-bg">
+          <div class="funnel-bar-cozy" style="width:33.2%; background: linear-gradient(90deg, #D97706, #F4D03F);">
+            <span class="funnel-bar-value" style="color:#1F2937;">33.2%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <span class="comp-chip">C2 66.0%</span>
+      <span class="comp-chip">OLong 66.8%</span>
+      <span class="comp-chip">KĐ 47.5%</span>
+    </div>
+
+    <!-- Conversion arrow -->
+    <div class="funnel-conversion" style="margin-top:6px;">
+      <span class="conv-arrow">↓</span>
+      <span class="conv-badge conv-ok">P4W: 77.7%</span>
+      <span style="font-size:11px; color:var(--grey-400);">P3M → P4W</span>
+    </div>
+
+    <!-- Stage: P4W -->
+    <div class="funnel-stage" style="margin-top:4px;">
+      <div class="funnel-label">P4W Recent</div>
+      <div class="funnel-bars">
+        <div class="funnel-bar-bg">
+          <div class="funnel-bar-cozy" style="width:25.8%; background: linear-gradient(90deg, #D97706, #F4D03F);">
+            <span class="funnel-bar-value" style="color:#1F2937;">25.8%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <span class="comp-chip">C2 57.6%</span>
+      <span class="comp-chip">OLong 54.0%</span>
+      <span class="comp-chip">Dr.T 5.4%</span>
+    </div>
+
+    <!-- Conversion arrow -->
+    <div class="funnel-conversion" style="margin-top:6px;">
+      <span class="conv-arrow">↓</span>
+      <span class="conv-badge conv-bad">BUMO: 34.1%</span>
+      <span style="font-size:11px; color:var(--grey-400);">P4W → BUMO</span>
+    </div>
+
+    <!-- Stage: BUMO -->
+    <div class="funnel-stage" style="margin-top:4px;">
+      <div class="funnel-label">BUMO</div>
+      <div class="funnel-bars">
+        <div class="funnel-bar-bg">
+          <div class="funnel-bar-cozy" style="width:8.8%; background: linear-gradient(90deg, #D97706, #F4D03F);">
+            <span class="funnel-bar-value" style="color:#1F2937; font-size:13px;">8.8%</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="comp-row">
+      <span class="comp-chip">C2 ~18%</span>
+      <span class="comp-chip">OLong ~15%</span>
+    </div>
+
+    <!-- TOM row -->
+    <div style="margin-top:14px; padding-top:12px; border-top:1px solid var(--grey-100);">
+      <div class="funnel-stage" style="margin-bottom:0;">
+        <div class="funnel-label" style="color:var(--grey-400); font-size:11px;">TOM (bonus)</div>
+        <div class="funnel-bars">
+          <div class="funnel-bar-bg" style="height:22px;">
+            <div class="funnel-bar-cozy" style="width:8.7%; background: linear-gradient(90deg, #64748B, #94A3B8); height:100%;">
+              <span style="font-size:12px; font-weight:800; color:white; padding-left:6px;">8.7%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-row" style="margin-top:2px;">
+        <span class="comp-chip">C2 31.5%</span>
+        <span class="comp-chip">OLong 27.9%</span>
+        <span class="comp-chip">KĐ 22.4%</span>
+      </div>
+    </div>
+  </div><!-- end funnel-card -->
+
+  <!-- RIGHT: COMPARISON TABLE -->
+  <div class="comparison-card">
+    <div class="card-label">Funnel Comparison — All Brands · Conversion Rates</div>
+    <table class="comp-table">
+      <thead>
+        <tr>
+          <th>Brand</th>
+          <th>TOM</th>
+          <th>Spontaneous</th>
+          <th>Total Aware</th>
+          <th>Consideration</th>
+          <th>P3M</th>
+          <th>P4W</th>
+          <th>BUMO<br><span style="font-size:9px;font-weight:400;color:var(--grey-400);">(est.)</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="row-cozy">
+          <td>
+            <span class="stage-dot" style="background:var(--cozy-green);"></span>
+            Cozy ★
+          </td>
+          <td class="val-cell bottleneck-cell">
+            8.7%
+            <span class="bottleneck-label">▼ Low</span>
+          </td>
+          <td class="val-cell val-cozy-yellow">39.6%</td>
+          <td class="val-cell val-cozy-green">91.8%</td>
+          <td class="val-cell bottleneck-cell">
+            34.7%
+            <span class="bottleneck-label">⚠ Drop</span>
+          </td>
+          <td class="val-cell val-cozy-yellow">33.2%</td>
+          <td class="val-cell val-cozy-yellow">25.8%</td>
+          <td class="val-cell val-cozy-yellow">~8.8%</td>
+        </tr>
+        <tr>
+          <td><span class="stage-dot" style="background:#EAB308;"></span>C2</td>
+          <td class="val-cell" style="color:var(--grey-800);">31.5%</td>
+          <td class="val-cell" style="color:var(--grey-800);">78.9%</td>
+          <td class="val-cell" style="color:var(--grey-800);">97.2%</td>
+          <td class="val-cell" style="color:var(--grey-800);">75.8%</td>
+          <td class="val-cell" style="color:var(--grey-800);">66.0%</td>
+          <td class="val-cell" style="color:var(--grey-800);">57.6%</td>
+          <td class="val-cell val-grey">~18%</td>
+        </tr>
+        <tr>
+          <td><span class="stage-dot" style="background:#60A5FA;"></span>OLong Tea+</td>
+          <td class="val-cell" style="color:var(--grey-800);">27.9%</td>
+          <td class="val-cell" style="color:var(--grey-800);">75.7%</td>
+          <td class="val-cell" style="color:var(--grey-800);">98.8%</td>
+          <td class="val-cell" style="color:var(--grey-800);">74.8%</td>
+          <td class="val-cell" style="color:var(--grey-800);">66.8%</td>
+          <td class="val-cell" style="color:var(--grey-800);">54.0%</td>
+          <td class="val-cell val-grey">~15%</td>
+        </tr>
+        <tr>
+          <td><span class="stage-dot" style="background:#F87171;"></span>Không Độ</td>
+          <td class="val-cell" style="color:var(--grey-800);">22.4%</td>
+          <td class="val-cell" style="color:var(--grey-800);">54.2%</td>
+          <td class="val-cell" style="color:var(--grey-800);">92.5%</td>
+          <td class="val-cell" style="color:var(--grey-800);">61.2%</td>
+          <td class="val-cell" style="color:var(--grey-800);">47.5%</td>
+          <td class="val-cell val-grey">—</td>
+          <td class="val-cell val-grey">—</td>
+        </tr>
+        <tr>
+          <td><span class="stage-dot" style="background:#A78BFA;"></span>Dr. Thanh</td>
+          <td class="val-cell val-grey">0.7%</td>
+          <td class="val-cell val-grey">4.9%</td>
+          <td class="val-cell" style="color:var(--grey-800);">73.1%</td>
+          <td class="val-cell val-grey">16.3%</td>
+          <td class="val-cell val-grey">9.9%</td>
+          <td class="val-cell val-grey">5.4%</td>
+          <td class="val-cell val-grey">~2%</td>
+        </tr>
+        <tr>
+          <td><span class="stage-dot" style="background:#FB923C;"></span>Tea Go</td>
+          <td class="val-cell val-grey">0.1%</td>
+          <td class="val-cell val-grey">1.0%</td>
+          <td class="val-cell val-grey">38.7%</td>
+          <td class="val-cell val-grey">9.2%</td>
+          <td class="val-cell val-grey">4.7%</td>
+          <td class="val-cell val-grey">2.3%</td>
+          <td class="val-cell val-grey">~0.3%</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Insight box inside card -->
+    <div style="margin-top:16px; padding:12px 14px; background:var(--grey-50); border-radius:8px; border-left: 4px solid var(--cozy-green);">
+      <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; font-weight:800; letter-spacing:2px; color:var(--grey-400); text-transform:uppercase; margin-bottom:8px;">Funnel Reading</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+        <div style="font-size:12px; color:var(--grey-800); line-height:1.4;">
+          <span style="color:var(--cozy-green-dark); font-weight:700;">✓ Awareness OK:</span> Cozy at 91.8% — competitive vs C2 (97.2%) and Không Độ (92.5%).
+        </div>
+        <div style="font-size:12px; color:var(--grey-800); line-height:1.4;">
+          <span style="color:var(--red); font-weight:700;">✗ Core gap:</span> Aware→Consid drops to 34.7% — less than half of C2 (75.8%) and OLong (74.8%).
+        </div>
+        <div style="font-size:12px; color:var(--grey-800); line-height:1.4;">
+          <span style="color:#B45309; font-weight:700;">△ TOM critical:</span> Only 8.7% vs C2 31.5% — Cozy is known but not top-of-mind.
+        </div>
+        <div style="font-size:12px; color:var(--grey-800); line-height:1.4;">
+          <span style="color:#B45309; font-weight:700;">△ Loyalty weak:</span> P4W→BUMO at 34.1% means frequent buyers don't commit to Cozy as primary.
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- end main-grid -->
+
+<!-- BOTTOM ROW -->
+<div class="bottom-row">
+
+  <!-- Card 1: Bottleneck -->
+  <div class="insight-card bottleneck">
+    <div class="insight-header bottleneck">
+      <span class="insight-icon">⚠️</span>
+      Where Cozy Loses
+    </div>
+    <div class="insight-item">
+      <div class="insight-bullet bullet-red"></div>
+      <div class="insight-text">
+        <strong>Bottleneck #1 — Aware → Consideration (37.8% conv.)</strong><br>
+        91.8% biết Cozy nhưng chỉ 34.7% đưa vào rổ cân nhắc. Gần ⅔ người biết nhưng không coi là lựa chọn — gap lớn nhất so với đối thủ.
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-bullet bullet-red"></div>
+      <div class="insight-text">
+        <strong>Bottleneck #2 — TOM chỉ 8.7%</strong><br>
+        Cozy không nằm đầu tiên trong đầu người dùng. C2 và OLong Tea+ dẫn đầu mind share, Cozy bị "lép vế" ở top of mind dù awareness tốt.
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="insight-bullet bullet-red"></div>
+      <div class="insight-text">
+        <strong>Bottleneck #3 — Loyalty (P4W→BUMO thấp)</strong><br>
+        Người dùng P4W vẫn không chọn Cozy là thương hiệu dùng thường xuyên nhất — BUMO conversion yếu hơn C2 và OLong rõ rệt.
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 2: Root Cause / Barriers -->
+  <div class="insight-card root-cause">
+    <div class="insight-header root-cause">
+      <span class="insight-icon">🔍</span>
+      Root Cause — Barriers
+    </div>
+
+    <!-- Barrier bars from actual data -->
+    <div class="barrier-bar-row">
+      <div class="barrier-name">Không thích vị / Vị chưa ngon</div>
+      <div class="barrier-track"><div class="barrier-fill" style="width:100%;"></div></div>
+      <div class="barrier-pct">34.1%</div>
+    </div>
+    <div class="barrier-bar-row">
+      <div class="barrier-name">Không đủ lựa chọn vị</div>
+      <div class="barrier-track"><div class="barrier-fill" style="width:61%; background:#D97706;"></div></div>
+      <div class="barrier-pct">20.8%</div>
+    </div>
+    <div class="barrier-bar-row">
+      <div class="barrier-name">Không tìm thấy tại điểm mua</div>
+      <div class="barrier-track"><div class="barrier-fill" style="width:28%; background:#D97706;"></div></div>
+      <div class="barrier-pct">9.6%</div>
+    </div>
+    <div class="barrier-bar-row">
+      <div class="barrier-name">Không được bảo quản lạnh</div>
+      <div class="barrier-track"><div class="barrier-fill" style="width:27%; background:#D97706;"></div></div>
+      <div class="barrier-pct">9.2%</div>
+    </div>
+    <div class="barrier-bar-row">
+      <div class="barrier-name">Giá cao hơn kỳ vọng</div>
+      <div class="barrier-track"><div class="barrier-fill" style="width:19%; background:#EAB308;"></div></div>
+      <div class="barrier-pct">6.6%</div>
+    </div>
+    <div class="barrier-bar-row">
+      <div class="barrier-name">Đường nhiều / lo sức khỏe</div>
+      <div class="barrier-track"><div class="barrier-fill" style="width:17%; background:#EAB308;"></div></div>
+      <div class="barrier-pct">5.7%</div>
+    </div>
+
+    <div style="margin-top:8px; padding:8px 10px; background:rgba(180,83,9,0.08); border-radius:6px; font-size:11px; color:#92400E; line-height:1.4;">
+      <strong>Takeaway:</strong> ~55% barrier đến từ <strong>vị/flavor</strong> và <strong>phân phối</strong> — không phải vấn đề truyền thông awareness.
+    </div>
+  </div>
+
+  <!-- Card 3: Action -->
+  <div class="insight-card action">
+    <div class="insight-header action">
+      <span class="insight-icon">🚀</span>
+      Recommended Actions
+    </div>
+    <div class="insight-item" style="margin-bottom:10px;">
+      <div class="action-number">1</div>
+      <div class="insight-text">
+        <strong style="color:var(--cozy-green-dark);">Ưu tiên: Mở rộng flavor portfolio</strong><br>
+        34.1% không thích vị hiện tại + 20.8% thiếu lựa chọn → cần ra mắt ≥2 vị mới nhắm vào nhu cầu phổ biến (vị chanh, ít đường, trái cây nhiệt đới).
+      </div>
+    </div>
+    <div class="insight-item" style="margin-bottom:10px;">
+      <div class="action-number">2</div>
+      <div class="insight-text">
+        <strong style="color:var(--cozy-green-dark);">Distribution fix & cold chain</strong><br>
+        9.6% "không tìm thấy" + 9.2% "không bảo quản lạnh" → audit điểm bán, đảm bảo sản phẩm có mặt đúng kênh và có tủ lạnh tại điểm bán trọng yếu.
+      </div>
+    </div>
+    <div class="insight-item" style="margin-bottom:10px;">
+      <div class="action-number">3</div>
+      <div class="insight-text">
+        <strong style="color:var(--cozy-green-dark);">Trial & sampling để kích consideration</strong><br>
+        Người biết nhưng không cân nhắc → cần trải nghiệm trực tiếp. Chạy sampling tại điểm bán + trial offer để "phá băng" consideration bottleneck.
+      </div>
+    </div>
+    <div class="insight-item">
+      <div class="action-number">4</div>
+      <div class="insight-text">
+        <strong style="color:var(--cozy-green-dark);">Loyalty & re-engagement</strong><br>
+        P4W→BUMO thấp → triển khai loyalty program, buy-more-save deals để chuyển người dùng thỉnh thoảng thành người dùng trung thành.
+      </div>
+    </div>
+  </div>
+
+</div><!-- end bottom-row -->
+
+</body>
+</html>

@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Slide 8 – Brand Funnel Analysis | Trà Cozy</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f1117; color: #e8eaf0; }
+
+  .page-header {
+    background: linear-gradient(135deg, #1a1d2e 0%, #0f1117 100%);
+    padding: 32px 48px 24px;
+    border-bottom: 1px solid #2a2d3e;
+  }
+  .page-header .slide-label {
+    font-size: 11px; letter-spacing: 2px; color: #F4A261;
+    text-transform: uppercase; margin-bottom: 8px;
+  }
+  .page-header h1 { font-size: 26px; font-weight: 700; color: #fff; }
+  .page-header .subtitle { font-size: 14px; color: #8892a4; margin-top: 6px; }
+
+  .key-question {
+    background: #1a1d2e; border-left: 3px solid #F4A261;
+    padding: 14px 20px; margin: 24px 48px 0;
+    border-radius: 0 8px 8px 0; font-size: 14px; color: #c9d0de;
+  }
+  .key-question strong { color: #F4A261; }
+
+  .legend-global {
+    display: flex; gap: 20px; padding: 18px 48px;
+    flex-wrap: wrap;
+  }
+  .legend-item { display: flex; align-items: center; gap: 7px; font-size: 13px; }
+  .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .legend-item.cozy-item .legend-dot { border: 2px solid #fff; }
+
+  .section { padding: 0 48px 40px; }
+  .section-title {
+    font-size: 13px; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 1.5px; color: #8892a4; margin-bottom: 6px; margin-top: 36px;
+  }
+  .chart-title { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  .chart-desc { font-size: 13px; color: #8892a4; margin-bottom: 16px; }
+  .chart-wrap {
+    background: #1a1d2e; border-radius: 12px; padding: 24px;
+    border: 1px solid #2a2d3e;
+  }
+  .chart-wrap canvas { max-height: 340px; }
+
+  /* Chart 1 grid */
+  .chart-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+  /* Insight box */
+  .insight {
+    background: #141728; border: 1px solid #2a2d3e; border-left: 3px solid #F4A261;
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin-top: 14px;
+    font-size: 13px; line-height: 1.7; color: #bcc5d4;
+  }
+  .insight .label { font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px;
+    color: #F4A261; font-weight: 700; margin-bottom: 5px; }
+
+  /* Conversion table */
+  .conv-table { width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 16px; }
+  .conv-table th {
+    background: #141728; color: #8892a4; font-weight: 600;
+    padding: 10px 14px; text-align: left; border-bottom: 1px solid #2a2d3e;
+  }
+  .conv-table td { padding: 10px 14px; border-bottom: 1px solid #1e2135; }
+  .conv-table tr:hover td { background: #1f2340; }
+  .conv-table .cozy-row td { color: #F4A261; font-weight: 600; }
+  .pill {
+    display: inline-block; padding: 2px 10px; border-radius: 20px;
+    font-size: 12px; font-weight: 600;
+  }
+  .pill-red { background: rgba(230,57,70,0.2); color: #ff6b6b; }
+  .pill-green { background: rgba(45,106,79,0.25); color: #52c78a; }
+  .pill-yellow { background: rgba(244,162,97,0.2); color: #F4A261; }
+  .pill-gray { background: rgba(255,255,255,0.07); color: #8892a4; }
+
+  /* Funnel visual */
+  .funnel-visual {
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 10px 0;
+  }
+  .funnel-stage {
+    display: flex; align-items: center; width: 100%; gap: 12px;
+  }
+  .funnel-stage-label {
+    width: 160px; text-align: right; font-size: 12px; color: #8892a4; flex-shrink: 0;
+  }
+  .funnel-bar-wrap { flex: 1; position: relative; height: 36px; }
+  .funnel-bar {
+    height: 36px; border-radius: 4px; display: flex; align-items: center;
+    padding-left: 10px; font-size: 13px; font-weight: 700; color: #fff;
+    transition: width 0.5s ease;
+  }
+  .funnel-drop {
+    width: 80px; text-align: center; font-size: 11px; font-weight: 600; flex-shrink: 0;
+  }
+
+  /* Wave section */
+  .wave-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-top: 16px; }
+  .wave-card {
+    background: #141728; border-radius: 10px; padding: 16px;
+    border: 1px solid #2a2d3e;
+  }
+  .wave-card-title { font-size: 11px; color: #8892a4; text-transform: uppercase;
+    letter-spacing: 1px; margin-bottom: 10px; }
+  .wave-brand-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid #1e2135; font-size: 13px;
+  }
+  .wave-brand-name { color: #bcc5d4; }
+  .wave-vals { display: flex; gap: 10px; }
+  .wave-val { font-weight: 700; }
+  .wave-arrow { font-size: 11px; }
+  .up { color: #52c78a; }
+  .down { color: #ff6b6b; }
+  .flat { color: #8892a4; }
+
+  /* KPI summary strip */
+  .kpi-strip { display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; margin-bottom: 20px; }
+  .kpi-card {
+    background: #141728; border-radius: 8px; padding: 12px 10px;
+    border: 1px solid #2a2d3e; text-align: center;
+  }
+  .kpi-card.highlight { border-color: #F4A261; }
+  .kpi-stage { font-size: 10px; color: #8892a4; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .kpi-val { font-size: 20px; font-weight: 800; color: #F4A261; }
+  .kpi-rank { font-size: 11px; color: #6a7484; margin-top: 2px; }
+
+  hr.divider { border: none; border-top: 1px solid #2a2d3e; margin: 8px 0 24px; }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div class="slide-label">Slide 8 — Brand Health Analysis</div>
+  <h1>Brand Funnel: Where Does Cozy Lose Consumers?</h1>
+  <div class="subtitle">Awareness → Trial → Recent Usage → Consideration → Most Often Used &nbsp;|&nbsp; n = 2,600 &nbsp;|&nbsp; Wave 2024–2025</div>
+</div>
+
+<div class="key-question">
+  <strong>Key Question:</strong> Cozy có awareness khá tốt (91.8% aided) — nhưng chỉ 8.8% người dùng chọn Cozy thường xuyên nhất. Tầng nào trong phễu đang rò rỉ lớn nhất?
+</div>
+
+<!-- GLOBAL LEGEND -->
+<div class="legend-global">
+  <div class="legend-item"><div class="legend-dot" style="background:#E63946"></div> C2</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#457B9D"></div> OLong Tea+ (Tea+)</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2D6A4F"></div> Không Độ</div>
+  <div class="legend-item cozy-item"><div class="legend-dot" style="background:#F4A261"></div> <strong style="color:#F4A261">Trà Cozy ★</strong></div>
+  <div class="legend-item"><div class="legend-dot" style="background:#6D6875"></div> Dr. Thanh</div>
+</div>
+
+<!-- ============================================================
+     CHART 1 – FUNNEL OVERVIEW
+============================================================ -->
+<div class="section">
+  <div class="section-title">Chart 1 of 5</div>
+  <div class="chart-title">Brand Funnel Overview — All Stages Compared</div>
+  <div class="chart-desc">Trả lời: "Cozy đang đứng ở đâu so với đối thủ ở mỗi tầng?" — Nhìn toàn bộ phễu trong một view.</div>
+
+  <!-- KPI strip for Cozy -->
+  <div class="kpi-strip">
+    <div class="kpi-card"><div class="kpi-stage">Top of Mind</div><div class="kpi-val">8.7%</div><div class="kpi-rank">#4 / 5</div></div>
+    <div class="kpi-card"><div class="kpi-stage">Spontaneous</div><div class="kpi-val">39.6%</div><div class="kpi-rank">#4 / 5</div></div>
+    <div class="kpi-card"><div class="kpi-stage">Aided Aware</div><div class="kpi-val" style="font-size:17px">91.8%</div><div class="kpi-rank">#4 / 5 <span style="color:#52c78a">≈ Top</span></div></div>
+    <div class="kpi-card highlight"><div class="kpi-stage">P3M Trial</div><div class="kpi-val">33.2%</div><div class="kpi-rank">#4 / 5</div></div>
+    <div class="kpi-card highlight"><div class="kpi-stage">P4W Usage</div><div class="kpi-val">25.8%</div><div class="kpi-rank">#4 / 5</div></div>
+    <div class="kpi-card"><div class="kpi-stage">Consideration</div><div class="kpi-val">34.7%</div><div class="kpi-rank">#4 / 5</div></div>
+    <div class="kpi-card highlight"><div class="kpi-stage">BUMO</div><div class="kpi-val">8.8%</div><div class="kpi-rank">#4 / 5</div></div>
+  </div>
+
+  <div class="chart-wrap">
+    <canvas id="chart1"></canvas>
+  </div>
+  <div class="insight">
+    <div class="label">📊 Insight</div>
+    Cozy duy trì <strong>Aided Awareness 91.8%</strong> — gần ngang bằng C2 (97.2%) và Tea+ (98.8%), chứng tỏ người tiêu dùng biết Cozy. Tuy nhiên, từ tầng Aided Awareness xuống P3M Trial, Cozy chỉ đạt <strong>33.2%</strong> so với C2/Tea+ ở mức 66%+. Gap lớn nhất không phải ở awareness mà ở conversion sang hành vi dùng thực tế.
+  </div>
+</div>
+
+<!-- ============================================================
+     CHART 2 – FUNNEL SHAPE (LINE)
+============================================================ -->
+<div class="section">
+  <div class="section-title">Chart 2 of 5</div>
+  <div class="chart-title">Funnel Shape — Profile của từng Brand</div>
+  <div class="chart-desc">Trả lời: "Hình dạng phễu của Cozy trông như thế nào?" — Đường phẳng = chuyển đổi tốt đều. Đường dốc đứng = bottleneck rõ ràng.</div>
+  <div class="chart-wrap">
+    <canvas id="chart2"></canvas>
+  </div>
+  <div class="insight">
+    <div class="label">📊 Insight</div>
+    Đường phễu của <strong style="color:#F4A261">Cozy</strong> có một cú rơi mạnh từ Aided Awareness (91.8%) xuống P3M Trial (33.2%) — <strong>rơi 58.6 điểm phần trăm</strong>. Trong khi C2 và Tea+ rơi chỉ ~30 điểm. Điều này cho thấy Cozy bị mắc kẹt ở giai đoạn "biết nhưng không thử / không dùng lại". Nguyên nhân nằm ở <strong>phân phối, trải nghiệm vị, hoặc barrier về flavor</strong> — không phải awareness.
+  </div>
+</div>
+
+<!-- ============================================================
+     CHART 3 – CONVERSION RATES
+============================================================ -->
+<div class="section">
+  <div class="section-title">Chart 3 of 5</div>
+  <div class="chart-title">Conversion Rate Between Stages — Bottleneck Diagnosis</div>
+  <div class="chart-desc">Trả lời: "Cozy rớt mạnh nhất ở đâu trong phễu?" — Theo Ipsos framework, phải nhìn tỷ lệ chuyển đổi chứ không chỉ % tuyệt đối.</div>
+
+  <div class="chart-wrap" style="overflow-x:auto">
+    <table class="conv-table">
+      <thead>
+        <tr>
+          <th>Conversion Stage</th>
+          <th style="color:#E63946">C2</th>
+          <th style="color:#457B9D">OLong Tea+</th>
+          <th style="color:#2D6A4F">Không Độ</th>
+          <th style="color:#F4A261">Trà Cozy ★</th>
+          <th style="color:#6D6875">Dr. Thanh</th>
+          <th>Đọc thế nào</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Aided → Consideration</strong></td>
+          <td>77.9%</td>
+          <td>75.7%</td>
+          <td>66.2%</td>
+          <td><span class="pill pill-yellow">37.8%</span></td>
+          <td>22.3%</td>
+          <td style="color:#8892a4; font-size:12px">Biết nhưng có cân nhắc không?</td>
+        </tr>
+        <tr>
+          <td><strong>Aided → P3M Trial</strong></td>
+          <td>67.9%</td>
+          <td>67.6%</td>
+          <td>51.4%</td>
+          <td><span class="pill pill-red">36.2%</span></td>
+          <td>13.5%</td>
+          <td style="color:#8892a4; font-size:12px">Biết nhưng có dùng thử không?</td>
+        </tr>
+        <tr>
+          <td><strong>P3M → P4W Usage</strong></td>
+          <td>87.3%</td>
+          <td>82.5%</td>
+          <td>78.5%</td>
+          <td><span class="pill pill-yellow">77.7%</span></td>
+          <td>54.5%</td>
+          <td style="color:#8892a4; font-size:12px">Đã thử có dùng gần đây không?</td>
+        </tr>
+        <tr>
+          <td><strong>P4W → BUMO Loyalty</strong></td>
+          <td>55.7%</td>
+          <td>54.4%</td>
+          <td>55.8%</td>
+          <td><span class="pill pill-yellow">34.1%</span></td>
+          <td>24.1%</td>
+          <td style="color:#8892a4; font-size:12px">Đang dùng có trở thành loyal không?</td>
+        </tr>
+        <tr>
+          <td><strong>Consideration → BUMO</strong></td>
+          <td>42.3%</td>
+          <td>40.1%</td>
+          <td>34.0%</td>
+          <td><span class="pill pill-red">25.4%</span></td>
+          <td>8.0%</td>
+          <td style="color:#8892a4; font-size:12px">Cân nhắc có thành dùng thường xuyên?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="chart-wrap" style="margin-top:16px">
+    <canvas id="chart3"></canvas>
+  </div>
+
+  <div class="insight">
+    <div class="label">🔴 Critical Bottleneck — Cozy</div>
+    <strong>Tầng Aided → P3M Trial (36.2%)</strong> là nơi Cozy rơi mạnh nhất so với benchmark C2/Tea+ (~68%). Trong số những người biết Cozy, chỉ 1 trên 3 đã từng thử trong 3 tháng qua. Đây là bottleneck #1. Bottleneck #2 là <strong>P4W → BUMO (34.1%)</strong>: trong những người đang dùng Cozy, chỉ 1 trên 3 chọn Cozy thường xuyên nhất — thấp hơn C2/Tea+ (~55%).
+  </div>
+</div>
+
+<!-- ============================================================
+     CHART 4 – WAVE TREND
+============================================================ -->
+<div class="section">
+  <div class="section-title">Chart 4 of 5</div>
+  <div class="chart-title">Trend 2024 → 2025 — Brand Health đang tăng hay giảm?</div>
+  <div class="chart-desc">Trả lời: "Cozy có đang cải thiện theo thời gian không?" — Momentum là tín hiệu quan trọng bên cạnh snapshot hiện tại.</div>
+
+  <div class="chart-grid-2">
+    <div class="chart-wrap">
+      <div style="font-size:13px;color:#8892a4;margin-bottom:10px">Spontaneous Awareness (%)</div>
+      <canvas id="chart4a"></canvas>
+    </div>
+    <div class="chart-wrap">
+      <div style="font-size:13px;color:#8892a4;margin-bottom:10px">BUMO — Brand Used Most Often (%)</div>
+      <canvas id="chart4b"></canvas>
+    </div>
+  </div>
+
+  <div class="wave-grid">
+    <div class="wave-card">
+      <div class="wave-card-title">Spontaneous Awareness</div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#E63946">C2</span>
+        <div class="wave-vals">
+          <span class="wave-val">79.6%</span>
+          <span class="wave-arrow down">▼ 1.4</span>
+          <span class="wave-val">78.2%</span>
+        </div>
+      </div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#457B9D">OLong Tea+</span>
+        <div class="wave-vals">
+          <span class="wave-val">76.5%</span>
+          <span class="wave-arrow down">▼ 1.5</span>
+          <span class="wave-val">75.0%</span>
+        </div>
+      </div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#2D6A4F">Không Độ</span>
+        <div class="wave-vals">
+          <span class="wave-val">54.0%</span>
+          <span class="wave-arrow up">▲ 0.3</span>
+          <span class="wave-val">54.3%</span>
+        </div>
+      </div>
+      <div class="wave-brand-row" style="border-bottom:none">
+        <span class="wave-brand-name" style="color:#F4A261;font-weight:700">Trà Cozy ★</span>
+        <div class="wave-vals">
+          <span class="wave-val">36.6%</span>
+          <span class="wave-arrow up" style="font-size:13px;font-weight:700">▲ +6.0</span>
+          <span class="wave-val">42.6%</span>
+        </div>
+      </div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-card-title">P3M Trial</div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#E63946">C2</span>
+        <div class="wave-vals"><span class="wave-val">65.6%</span><span class="wave-arrow up">▲ 0.9</span><span class="wave-val">66.5%</span></div>
+      </div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#457B9D">OLong Tea+</span>
+        <div class="wave-vals"><span class="wave-val">66.8%</span><span class="wave-arrow flat">→ 0.0</span><span class="wave-val">66.8%</span></div>
+      </div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#2D6A4F">Không Độ</span>
+        <div class="wave-vals"><span class="wave-val">46.4%</span><span class="wave-arrow up">▲ 2.2</span><span class="wave-val">48.6%</span></div>
+      </div>
+      <div class="wave-brand-row" style="border-bottom:none">
+        <span class="wave-brand-name" style="color:#F4A261;font-weight:700">Trà Cozy ★</span>
+        <div class="wave-vals"><span class="wave-val">30.6%</span><span class="wave-arrow up" style="font-size:13px;font-weight:700">▲ +5.2</span><span class="wave-val">35.8%</span></div>
+      </div>
+    </div>
+    <div class="wave-card">
+      <div class="wave-card-title">BUMO (Loyalty)</div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#E63946">C2</span>
+        <div class="wave-vals"><span class="wave-val">33.2%</span><span class="wave-arrow down">▼ 2.1</span><span class="wave-val">31.1%</span></div>
+      </div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#457B9D">OLong Tea+</span>
+        <div class="wave-vals"><span class="wave-val">30.6%</span><span class="wave-arrow down">▼ 1.1</span><span class="wave-val">29.5%</span></div>
+      </div>
+      <div class="wave-brand-row">
+        <span class="wave-brand-name" style="color:#2D6A4F">Không Độ</span>
+        <div class="wave-vals"><span class="wave-val">20.0%</span><span class="wave-arrow up">▲ 1.5</span><span class="wave-val">21.5%</span></div>
+      </div>
+      <div class="wave-brand-row" style="border-bottom:none">
+        <span class="wave-brand-name" style="color:#F4A261;font-weight:700">Trà Cozy ★</span>
+        <div class="wave-vals"><span class="wave-val">8.3%</span><span class="wave-arrow up" style="font-size:13px;font-weight:700">▲ +1.0</span><span class="wave-val">9.3%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="insight">
+    <div class="label">📈 Insight — Positive Momentum</div>
+    Đây là tín hiệu <strong style="color:#52c78a">tích cực</strong>: Cozy là brand duy nhất trong top 4 có <strong>Spontaneous Awareness tăng mạnh +6 điểm</strong> (36.6% → 42.6%), P3M Trial tăng +5.2 điểm, và BUMO tăng +1 điểm từ 2024 sang 2025. Trong khi C2 và Tea+ đều đang giảm nhẹ ở awareness và BUMO. Cozy đang trong giai đoạn <strong>build momentum</strong> — cần khai thác đúng bottleneck để accelerate.
+  </div>
+</div>
+
+<!-- ============================================================
+     CHART 5 – TOP BARRIERS
+============================================================ -->
+<div class="section">
+  <div class="section-title">Chart 5 of 5</div>
+  <div class="chart-title">Top Barriers — Vì Sao Người Dùng Không Chọn Cozy?</div>
+  <div class="chart-desc">Trả lời: "Root cause của conversion thấp là gì?" — Barriers giải thích tại sao Aided Awareness cao nhưng Trial và Loyalty thấp.</div>
+  <div class="chart-wrap">
+    <canvas id="chart5"></canvas>
+  </div>
+  <div class="insight">
+    <div class="label">🔍 Root Cause Analysis</div>
+    <strong>Barrier #1 — Hương vị không phù hợp (19.5%):</strong> Gần 1/5 respondents không thích hương vị Cozy — đây là lý do trực tiếp nhất giải thích tại sao awareness → trial conversion thấp. Người biết Cozy nhưng đã thử và không ưng vị.
+    <br><br>
+    <strong>Barrier #2 — Thiếu đa dạng vị (11.9%):</strong> Cozy bị đánh giá thiếu variety so với C2 (13+ variants). Đây là bottleneck cho cả trial lẫn repeat usage.
+    <br><br>
+    <strong>Barrier #3 — Không có ở cửa hàng (5.5%) + Không bảo quản lạnh (5.3%):</strong> Distribution và cold-chain là barrier thứ cấp — người muốn mua nhưng không tìm được sản phẩm. Cộng dồn 2 barrier này = <strong>10.8%</strong> — con số đáng kể cho bài toán accessibility.
+    <br><br>
+    <strong>Kết luận:</strong> Cozy cần ưu tiên theo thứ tự: (1) Cải thiện/mở rộng flavor profile, (2) Tăng phân phối điểm bán, (3) Đảm bảo cold-chain. Awareness marketing không phải ưu tiên hàng đầu.
+  </div>
+</div>
+
+<div style="height:48px"></div>
+
+<script>
+const BRANDS = ['C2','OLong Tea+','Không Độ','Trà Cozy','Dr. Thanh'];
+const COLORS = ['#E63946','#457B9D','#2D6A4F','#F4A261','#6D6875'];
+const BORDER = ['#E63946','#457B9D','#2D6A4F','#ffffff','#6D6875'];
+
+const funnelData = {
+  'C2':        { TOM:35.8, Spontaneous:78.9, Aided:97.2, P3M:66.0, P4W:57.6, Consideration:75.8, BUMO:32.1 },
+  'OLong Tea+':{ TOM:27.9, Spontaneous:75.7, Aided:98.8, P3M:66.8, P4W:55.1, Consideration:74.8, BUMO:30.0 },
+  'Không Độ':  { TOM:22.4, Spontaneous:54.2, Aided:92.5, P3M:47.5, P4W:37.3, Consideration:61.2, BUMO:20.8 },
+  'Trà Cozy':  { TOM:8.7,  Spontaneous:39.6, Aided:91.8, P3M:33.2, P4W:25.8, Consideration:34.7, BUMO:8.8 },
+  'Dr. Thanh': { TOM:0.7,  Spontaneous:4.9,  Aided:73.1, P3M:9.9,  P4W:5.4,  Consideration:16.3, BUMO:1.3 },
+};
+
+const STAGES = ['TOM','Spontaneous','Aided','P3M','P4W','Consideration','BUMO'];
+const STAGE_LABELS = ['Top of Mind','Spontaneous','Aided Aware','P3M Trial','P4W Usage','Consideration','BUMO'];
+
+const defOpts = {
+  responsive: true,
+  plugins: { legend: { labels: { color:'#bcc5d4', font:{size:12} } },
+             tooltip: { callbacks: { label: c => ` ${c.dataset.label}: ${c.raw}%` } } },
+  scales: {
+    x: { ticks:{color:'#8892a4',font:{size:11}}, grid:{color:'#1e2135'} },
+    y: { ticks:{color:'#8892a4',font:{size:11},callback:v=>v+'%'}, grid:{color:'#1e2135'}, min:0 }
+  }
+};
+
+// CHART 1 — Grouped bar
+const datasets1 = BRANDS.map((b,i) => ({
+  label: b,
+  data: STAGES.map(s => funnelData[b][s]),
+  backgroundColor: COLORS[i] + (b==='Trà Cozy' ? 'ff' : 'cc'),
+  borderColor: BORDER[i],
+  borderWidth: b==='Trà Cozy' ? 2 : 1,
+}));
+
+new Chart(document.getElementById('chart1'), {
+  type: 'bar',
+  data: { labels: STAGE_LABELS, datasets: datasets1 },
+  options: { ...defOpts, scales: { ...defOpts.scales, y: { ...defOpts.scales.y, max:110 } } }
+});
+
+// CHART 2 — Line / funnel shape
+const datasets2 = BRANDS.map((b,i) => ({
+  label: b,
+  data: STAGES.map(s => funnelData[b][s]),
+  borderColor: COLORS[i],
+  backgroundColor: COLORS[i] + '20',
+  pointBackgroundColor: COLORS[i],
+  pointBorderColor: b==='Trà Cozy' ? '#fff' : COLORS[i],
+  pointBorderWidth: b==='Trà Cozy' ? 2 : 1,
+  pointRadius: b==='Trà Cozy' ? 7 : 5,
+  borderWidth: b==='Trà Cozy' ? 3 : 1.5,
+  borderDash: b==='Trà Cozy' ? [] : [],
+  tension: 0.3,
+  fill: false,
+}));
+
+new Chart(document.getElementById('chart2'), {
+  type: 'line',
+  data: { labels: STAGE_LABELS, datasets: datasets2 },
+  options: { ...defOpts, scales: { ...defOpts.scales, y: { ...defOpts.scales.y, max:110 } } }
+});
+
+// CHART 3 — Conversion rates grouped bar
+const convStages = ['Aided → Consideration','Aided → P3M Trial','P3M → P4W Usage','P4W → BUMO','Consideration → BUMO'];
+const convData = {
+  'C2':         [77.9, 67.9, 87.3, 55.7, 42.3],
+  'OLong Tea+': [75.7, 67.6, 82.5, 54.4, 40.1],
+  'Không Độ':   [66.2, 51.4, 78.5, 55.8, 34.0],
+  'Trà Cozy':   [37.8, 36.2, 77.7, 34.1, 25.4],
+  'Dr. Thanh':  [22.3, 13.5, 54.5, 24.1, 8.0],
+};
+
+const datasets3 = BRANDS.map((b,i) => ({
+  label: b,
+  data: convData[b],
+  backgroundColor: COLORS[i] + (b==='Trà Cozy' ? 'ff' : 'bb'),
+  borderColor: BORDER[i],
+  borderWidth: b==='Trà Cozy' ? 2 : 1,
+}));
+
+new Chart(document.getElementById('chart3'), {
+  type: 'bar',
+  data: { labels: convStages, datasets: datasets3 },
+  options: {
+    ...defOpts,
+    scales: {
+      ...defOpts.scales,
+      y: { ...defOpts.scales.y, max:100,
+           title:{ display:true, text:'Conversion Rate (%)', color:'#8892a4', font:{size:11} } }
+    }
+  }
+});
+
+// CHART 4a — Spontaneous wave
+const waveLabels = ['2024','2025'];
+const waveSpont = {
+  'C2': [79.6, 78.2], 'OLong Tea+': [76.5, 75.0],
+  'Không Độ': [54.0, 54.3], 'Trà Cozy': [36.6, 42.6], 'Dr. Thanh': [4.4, 5.5],
+};
+const datasets4a = BRANDS.map((b,i) => ({
+  label: b, data: waveSpont[b],
+  borderColor: COLORS[i], backgroundColor: COLORS[i]+'30',
+  pointRadius: 6, borderWidth: b==='Trà Cozy' ? 3 : 1.5, tension: 0.2, fill:false,
+  pointBorderColor: b==='Trà Cozy' ? '#fff' : COLORS[i], pointBorderWidth: b==='Trà Cozy' ? 2:1,
+}));
+new Chart(document.getElementById('chart4a'), {
+  type: 'line',
+  data: { labels: waveLabels, datasets: datasets4a },
+  options: { ...defOpts, scales: { ...defOpts.scales, y: { ...defOpts.scales.y, min:0, max:110 } } }
+});
+
+// CHART 4b — BUMO wave
+const waveBUMO = {
+  'C2': [33.2, 31.1], 'OLong Tea+': [30.6, 29.5],
+  'Không Độ': [20.0, 21.5], 'Trà Cozy': [8.3, 9.3], 'Dr. Thanh': [1.4, 1.2],
+};
+const datasets4b = BRANDS.map((b,i) => ({
+  label: b, data: waveBUMO[b],
+  borderColor: COLORS[i], backgroundColor: COLORS[i]+'30',
+  pointRadius: 6, borderWidth: b==='Trà Cozy' ? 3 : 1.5, tension: 0.2, fill:false,
+  pointBorderColor: b==='Trà Cozy' ? '#fff' : COLORS[i], pointBorderWidth: b==='Trà Cozy' ? 2:1,
+}));
+new Chart(document.getElementById('chart4b'), {
+  type: 'line',
+  data: { labels: waveLabels, datasets: datasets4b },
+  options: { ...defOpts, scales: { ...defOpts.scales, y: { ...defOpts.scales.y, min:0, max:45 } } }
+});
+
+// CHART 5 — Barriers horizontal bar
+const barrierLabels = [
+  'Không thích hương vị','Thiếu đa dạng vị','Không có ở cửa hàng',
+  'Không bảo quản lạnh','Giá cao hơn kỳ vọng','Quá nhiều đường',
+  'Chưa tin chất lượng','Không lành mạnh','Thiếu cảm giác premium'
+];
+const barrierVals = [19.5, 11.9, 5.5, 5.3, 3.8, 3.3, 2.0, 1.1, 1.0];
+const barrierColors = barrierVals.map((v,i) => i===0?'#E63946dd':i===1?'#F4A261dd':i<4?'#457B9Ddd':'#6D6875bb');
+
+new Chart(document.getElementById('chart5'), {
+  type: 'bar',
+  data: {
+    labels: barrierLabels,
+    datasets: [{
+      label: 'Trà Cozy — Barrier (%)',
+      data: barrierVals,
+      backgroundColor: barrierColors,
+      borderRadius: 4,
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: c => ` ${c.raw}% của tổng respondents` } }
+    },
+    scales: {
+      x: { ticks:{color:'#8892a4',callback:v=>v+'%'}, grid:{color:'#1e2135'}, max:25 },
+      y: { ticks:{color:'#e8eaf0',font:{size:12}}, grid:{display:false} }
+    }
+  }
+});
+</script>
+</body>
+</html>

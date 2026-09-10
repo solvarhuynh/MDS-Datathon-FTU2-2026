@@ -1,0 +1,19 @@
+Slide 10 - Key Driver Analysis / Barriers & Conversion Blockers
+
+Main message:
+Cozy's conversion problem is mainly driven by product experience and availability, not promotion.
+
+Key insight:
+- Taste / flavor is the largest blocker for Cozy at 29.1%.
+- Availability is the second blocker at 10.0%.
+- Promotion is low at 1.3%, so discounting alone is unlikely to fix conversion.
+
+Priority drivers:
+1. Taste / flavor: refresh taste profile, hero the most appealing variants, support with sampling.
+2. Availability: improve cold-channel presence and focus on office, school, lunch, and after-meal occasions.
+3. Brand relevance: modernize pack/communication and anchor Cozy in a daily tea routine.
+
+Slide design:
+- Left: heatmap by brand x barrier group.
+- Right: priority box with three actions: Fix taste, increase availability, activate trial-to-repeat.
+- Use warm barrier colors: light yellow for low barrier, brown/dark orange for high barrier.
