@@ -3,16 +3,17 @@
 
 <div align="center">
 
-[![Competition](https://img.shields.io/badge/Competition-MDS%20Datathon%202026-0052CC?style=for-the-badge&logo=target)](https://github.com/solvarhuynh/MDS-Datathon-FTU2-2026)
-[![Organizer](https://img.shields.io/badge/Host-FTU2%20%E2%80%94%20MDS-orange?style=for-the-badge)](https://github.com/solvarhuynh/MDS-Datathon-FTU2-2026)
-[![Achievement](https://img.shields.io/badge/Award-TOP%205%20FINALIST-gold?style=for-the-badge&logo=trophy)](deliverables/achievements/certificate_top5_mds2026.png)
-[![Team](https://img.shields.io/badge/Team-FUU-2ECC71?style=for-the-badge)](#-thành-viên-đội-thi-fuu)
+[![Competition](https://img.shields.io/badge/Competition-MDS%20Datathon%202026-0052CC?style=for-the-badge&logo=target)](https://www.facebook.com/MDS.Ftu2)
+[![Organizer](https://img.shields.io/badge/Host-FTU2%20%E2%80%94%20MDS-orange?style=for-the-badge)](https://www.facebook.com/ftuhcmcity)
+[![Award](https://img.shields.io/badge/Award-TOP%205%20FINALIST-gold?style=for-the-badge&logo=trophy)](https://www.facebook.com/photo/?fbid=1332448379013847&set=a.609148298010529)
+[![Team](https://img.shields.io/badge/Team-FUU-2ECC71?style=for-the-badge)](https://www.facebook.com/photo/?fbid=1332448379013847&set=a.609148298010529)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://mds-datathon-ftu2-2026.vercel.app/)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-blue?style=for-the-badge&logo=python)](requirements.txt)
 [![Data](https://img.shields.io/badge/Sample%20Size-2%2C600%20Respondents-purple?style=for-the-badge)](data/processed/cleaned_dataset.xlsx)
 
 <br/>
 
-[**Slide Thuyết Trình Chung Kết (PDF)**](deliverables/slides/MDS_FUU_Final_Deck_V3.pdf) • [**Dashboard Tương Tác (HTML)**](dashboards/brand_funnel_interactive.html) • [**Báo Cáo Xử Lý Dữ Liệu (MD)**](docs/methodology.md)
+[**🌐 Web Showcase (Live Vercel)**](https://mds-datathon-ftu2-2026.vercel.app/) • [**📊 Dashboard Tương Tác (Live Web)**](https://mds-datathon-ftu2-2026.vercel.app/dashboards/brand_funnel_interactive.html) • [**📑 Slide Card View (Live Web)**](https://mds-datathon-ftu2-2026.vercel.app/dashboards/brand_funnel_slide_view.html) • [**📄 Slide Deck Chung Kết (PDF)**](deliverables/slides/MDS_FUU_Final_Deck_V3.pdf) • [**📸 Ảnh Đội Thi (Facebook)**](https://www.facebook.com/photo/?fbid=1332448379013847&set=a.609148298010529)
 
 </div>
 
@@ -23,8 +24,8 @@
 | STT | Họ và Tên | Vai Trò | Đơn Vị Đào Tạo | Thông Tin Kết Nối |
 |:---:|:---|:---|:---|:---:|
 | 1 | **Đặng Nguyễn Thu Hà** | **Nhóm trưởng (Team Leader)** | Trường ĐH Ngoại Thương Cơ sở II (FTU2) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dangnguyenthuha/) |
-| 2 | **Lê Chí Hoàng** | **Thành viên (Member)** | Trường ĐH Công nghệ Thông tin - ĐHQG-HCM (UIT) | [![UIT](https://img.shields.io/badge/UIT-Member-blue?style=flat)](https://github.com/solvarhuynh/MDS-Datathon-FTU2-2026) |
-| 3 | **Huỳnh Trung Nghĩa** | **Thành viên (Member)** | Trường ĐH Công nghệ Kỹ thuật TP.HCM (HCMTUE) | [![GitHub](https://img.shields.io/badge/GitHub-solvarhuynh-181717?style=flat&logo=github)](https://github.com/solvarhuynh) |
+| 2 | **Lê Chí Hoàng** | **Thành viên (Member)** | Trường ĐH Công nghệ Thông tin - ĐHQG-HCM (UIT) | — |
+| 3 | **Huỳnh Trung Nghĩa** | **Thành viên (Member)** | Trường ĐH Công nghệ Kỹ thuật TP.HCM (HCMTUE) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/solvarhuynh/) [![GitHub](https://img.shields.io/badge/GitHub-solvarhuynh-181717?style=flat&logo=github)](https://github.com/solvarhuynh) |
 
 ---
 
@@ -43,17 +44,20 @@
 
 ## 1. TỔNG QUAN DỰ ÁN & THÀNH TÍCH
 
-Dự án này là toàn bộ kho lưu trữ mã nguồn, dữ liệu, tài liệu phân tích thị trường và sản phẩm dự thi của **Đội thi FUU** tham gia cuộc thi **MDS Datathon 2026** do CLB Khoa học Dữ liệu MDS - Trường Đại học Ngoại Thương Cơ sở II (FTU2) tổ chức vào **Tháng 6/2026**.
+Dự án này là toàn bộ kho lưu trữ mã nguồn, dữ liệu, tài liệu phân tích thị trường và sản phẩm dự thi của **Đội thi FUU** tham gia cuộc thi **MDS Datathon 2026** do [CLB Khoa học Dữ liệu MDS](https://www.facebook.com/MDS.Ftu2) - [Trường Đại học Ngoại Thương Cơ sở II (FTU2)](https://www.facebook.com/ftuhcmcity) tổ chức vào **Tháng 6/2026**.
 
 - **Đề tài**: *Brand Health Tracking & Growth Acceleration for Cozy Ready-to-Drink (RTD) Tea in Vietnam Market (2024–2026)*.
 - **Thành tích**: **TOP 5 ĐỘI THI XUẤT SẮC NHẤT TOÀN QUỐC (TOP 5 FINALIST)**.
 - **Dữ liệu khảo sát**: Khảo sát thực tế diện rộng gồm **2.600 người tiêu dùng** (Wave 2024: n=1.300; Wave 2025: n=1.300) trên 1.068 biến số khảo sát chuyên sâu (nhận biết, dùng thử, tần suất, rào cản, hình tượng thương hiệu).
+- **Hình ảnh vinh danh**: [Xem ảnh đội thi trên Fanpage chính thức của FTU2](https://www.facebook.com/photo/?fbid=1332448379013847&set=a.609148298010529).
 
 <br/>
 
 <div align="center">
-  <img src="deliverables/achievements/certificate_top5_mds2026.png" alt="Chứng nhận Top 5 MDS Datathon 2026" width="750" />
-  <p><em>Chứng nhận Top 5 Chung cuộc MDS Datathon 2026 — Đội thi FUU</em></p>
+  <a href="https://www.facebook.com/photo/?fbid=1332448379013847&set=a.609148298010529" target="_blank" title="Nhấn để xem bài viết vinh danh trên Fanpage FTU2">
+    <img src="deliverables/achievements/certificate_top5_mds2026.png" alt="Chứng nhận Top 5 MDS Datathon 2026" width="750" />
+  </a>
+  <p><em>Chứng nhận Top 5 Chung cuộc MDS Datathon 2026 — Đội thi FUU (Nhấn vào ảnh để xem bài viết vinh danh)</em></p>
 </div>
 
 ---
@@ -138,8 +142,13 @@ graph TD
 ```text
 MDS-Datathon-FTU2-2026/
 ├── README.md                           # Hồ sơ dự án & tài liệu tổng quan
+├── index.html                          # Landing Page Web Showcase triển khai Vercel
+├── vercel.json                         # Cấu hình định tuyến & Hosting Vercel
 ├── requirements.txt                    # Thư viện Python phụ thuộc
 ├── .gitignore                          # Cấu hình bỏ qua cache, file tạm
+│
+├── api/
+│   └── index.py                        # Serverless Python Endpoint cho Vercel
 │
 ├── data/                               # Dữ liệu phục vụ phân tích
 │   ├── processed/
@@ -287,10 +296,14 @@ python src/charts/slide07_root_cause_barriers/charts_slide7.py
 python src/charts/slide11_sku_hero/charts_sku_hero.py
 ```
 
-### 8.5 Trải Nghiệm Dashboard Trực Quan Hóa
-Mở trực tiếp các tệp HTML trong trình duyệt web để tương tác với dữ liệu:
-- **Interactive Dark-Mode Dashboard**: [`dashboards/brand_funnel_interactive.html`](dashboards/brand_funnel_interactive.html)
-- **Slide Card View Dashboard**: [`dashboards/brand_funnel_slide_view.html`](dashboards/brand_funnel_slide_view.html)
+### 8.5 Trải Nghiệm Dashboard Trực Quan Hóa (Live & Local)
+- **Trải nghiệm trực tuyến qua Vercel (Không cần cài đặt)**:
+  - 🌐 [Trang Chủ Web Showcase](https://mds-datathon-ftu2-2026.vercel.app/)
+  - 📊 [Dashboard Tương Tác Dark-Mode (Chart.js)](https://mds-datathon-ftu2-2026.vercel.app/dashboards/brand_funnel_interactive.html)
+  - 📑 [Giao Diện Thẻ Slide Card View](https://mds-datathon-ftu2-2026.vercel.app/dashboards/brand_funnel_slide_view.html)
+- **Hoặc mở trực tiếp file nội bộ trong thư mục**:
+  - [`dashboards/brand_funnel_interactive.html`](dashboards/brand_funnel_interactive.html)
+  - [`dashboards/brand_funnel_slide_view.html`](dashboards/brand_funnel_slide_view.html)
 
 ---
 
@@ -299,6 +312,7 @@ Mở trực tiếp các tệp HTML trong trình duyệt web để tương tác v
 - **Đội ngũ thực hiện**: **Team FUU (MDS Datathon 2026)**
   - **Đặng Nguyễn Thu Hà** — Nhóm trưởng (FTU2) — [LinkedIn Profile](https://www.linkedin.com/in/dangnguyenthuha/)
   - **Lê Chí Hoàng** — Thành viên (UIT)
-  - **Huỳnh Trung Nghĩa** — Thành viên (FTU2) — [GitHub Profile](https://github.com/solvarhuynh)
-- **Đơn vị tổ chức cuộc thi**: CLB Khoa học Dữ liệu MDS — Trường Đại học Ngoại Thương Cơ sở II tại TP. Hồ Chí Minh (FTU2)
+  - **Huỳnh Trung Nghĩa** — Thành viên (HCMTUE) — [LinkedIn Profile](https://www.linkedin.com/in/solvarhuynh/) • [GitHub](https://github.com/solvarhuynh)
+- **Đơn vị tổ chức cuộc thi**: [CLB Khoa học Dữ liệu MDS](https://www.facebook.com/MDS.Ftu2) — [Trường Đại học Ngoại Thương Cơ sở II tại TP.HCM (FTU2)](https://www.facebook.com/ftuhcmcity)
+- **Hình ảnh vinh danh**: [Xem ảnh đội thi trên Fanpage chính thức của FTU2](https://www.facebook.com/photo/?fbid=1332448379013847&set=a.609148298010529)
 - **Mục đích chia sẻ**: Kho lưu trữ mở phục vụ mục đích học thuật, nghiên cứu phương pháp luận và tham khảo chuyên môn cho các kỳ thi Datathon & Marketing Analytics.
