@@ -19,8 +19,8 @@
 
 ## THÀNH VIÊN ĐỘI THI (FUU TEAM)
 
-| STT | Họ và Tên | Vai Trò | Đơn Vị Đào Tạo | Thông Tin Kết Nối |
-|:---:|:---|:---|:---|:---:|
+| STT | Họ và Tên | Vai Trò | Đơn Vị | Thông Tin Kết Nối |
+|:---:|:----|:---|:---|:---:|
 | 1 | **Đặng Nguyễn Thu Hà** | **Nhóm trưởng** | Trường ĐH Ngoại Thương Cơ sở II (FTU2) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dangnguyenthuha/) |
 | 2 | **Lê Chí Hoàng** | **Thành viên** | Trường ĐH Công nghệ Thông tin - ĐHQG-HCM (UIT) | — |
 | 3 | **Huỳnh Trung Nghĩa** | **Thành viên** | Trường ĐH Công nghệ Kỹ thuật TP.HCM (HCMUTE) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/solvarhuynh/)
