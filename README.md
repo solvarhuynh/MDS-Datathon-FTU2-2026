@@ -294,15 +294,6 @@ python src/charts/slide07_root_cause_barriers/charts_slide7.py
 python src/charts/slide11_sku_hero/charts_sku_hero.py
 ```
 
-### 8.5 Trải Nghiệm Dashboard Trực Quan Hóa (Live & Local)
-- **Trải nghiệm trực tuyến qua Vercel (Không cần cài đặt)**:
-  - [Trang Chủ Web Showcase](https://mds-datathon-ftu2-2026.vercel.app/)
-  - [Dashboard Tương Tác Dark-Mode (Chart.js)](https://mds-datathon-ftu2-2026.vercel.app/dashboards/brand_funnel_interactive.html)
-  - [Giao Diện Thẻ Slide Card View](https://mds-datathon-ftu2-2026.vercel.app/dashboards/brand_funnel_slide_view.html)
-- **Hoặc mở trực tiếp file nội bộ trong thư mục**:
-  - [`dashboards/brand_funnel_interactive.html`](dashboards/brand_funnel_interactive.html)
-  - [`dashboards/brand_funnel_slide_view.html`](dashboards/brand_funnel_slide_view.html)
-
 ---
 
 ## 9. BẢN QUYỀN & THÔNG TIN LIÊN HỆ
