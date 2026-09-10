@@ -23,8 +23,7 @@
 |:---:|:---|:---|:---|:---:|
 | 1 | **Đặng Nguyễn Thu Hà** | **Nhóm trưởng** | Trường ĐH Ngoại Thương Cơ sở II (FTU2) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dangnguyenthuha/) |
 | 2 | **Lê Chí Hoàng** | **Thành viên** | Trường ĐH Công nghệ Thông tin - ĐHQG-HCM (UIT) | — |
-| 3 | **Huỳnh Trung Nghĩa** | **Thành viên** | Trường ĐH Công nghệ Kỹ thuật TP.HCM (HCMUTE) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/solvarhuynh/) [![GitHub](https://img.shields.io/badge/GitHub-solvarhuynh-181717?style=flat&logo=github)](https://github.com/solvarhuynh) |
-
+| 3 | **Huỳnh Trung Nghĩa** | **Thành viên** | Trường ĐH Công nghệ Kỹ thuật TP.HCM (HCMUTE) | [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=flat&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/solvarhuynh/)
 ---
 
 ## MỤC LỤC
@@ -291,9 +290,9 @@ python src/charts/slide11_sku_hero/charts_sku_hero.py
 
 ## 9. BẢN QUYỀN & THÔNG TIN LIÊN HỆ
 
-- **Đội ngũ thực hiện**: **Team FUU (Á Quân / 1st Runner-up — myInsight - MDS Datathon Challenge 2026)**
-  - **Đặng Nguyễn Thu Hà** — Nhóm trưởng (FTU2) — [LinkedIn Profile](https://www.linkedin.com/in/dangnguyenthuha/)
-  - **Lê Chí Hoàng** — Thành viên (UIT)
-  - **Huỳnh Trung Nghĩa** — Thành viên (HCMUTE) — [LinkedIn Profile](https://www.linkedin.com/in/solvarhuynh/) • [GitHub](https://github.com/solvarhuynh)
+- **Đội ngũ thực hiện**: **Team FUU**
+  - **Đặng Nguyễn Thu Hà** — [LinkedIn Profile](https://www.linkedin.com/in/dangnguyenthuha/)
+  - **Lê Chí Hoàng**
+  - **Huỳnh Trung Nghĩa** — [LinkedIn Profile](https://www.linkedin.com/in/solvarhuynh/)
 - **Đơn vị tổ chức cuộc thi**: [CLB Khoa học Dữ liệu MDS](https://www.facebook.com/MDS.Ftu2) — [Trường Đại học Ngoại Thương Cơ sở II tại TP.HCM (FTU2)](https://www.facebook.com/ftuhcmcity)
 - **Mục đích chia sẻ**: Kho lưu trữ mở phục vụ mục đích học thuật, nghiên cứu phương pháp luận và tham khảo chuyên môn cho các kỳ thi Datathon & Marketing Analytics.
