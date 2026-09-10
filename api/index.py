@@ -8,13 +8,13 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         payload = {
-            "competition": "MDS Datathon 2026 (FTU2)",
-            "award": "Top 5 Finalist",
+            "competition": "myInsight - MDS Datathon Challenge 2026 (FTU2)",
+            "award": "1st Runner-up (Á Quân)",
             "team": "FUU",
             "members": [
                 {"name": "Dang Nguyen Thu Ha", "role": "Team Leader", "school": "FTU2"},
                 {"name": "Le Chi Hoang", "role": "Member", "school": "UIT"},
-                {"name": "Huynh Trung Nghia", "role": "Member", "school": "FTU2"}
+                {"name": "Huynh Trung Nghia", "role": "Member", "school": "HCMTUE"}
             ],
             "dataset": {
                 "sample_size": 2600,
