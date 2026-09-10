@@ -12,7 +12,7 @@
 
 <br/>
 
-[**📄 Slide Thuyết Trình Chung Kết (PDF)**](deliverables/slides/MDS_FUU_Final_Deck_V3.pdf) • [**📊 Dashboard Tương Tác (HTML)**](dashboards/brand_funnel_interactive.html) • [**📑 Báo Cáo Xử Lý Dữ Liệu (MD)**](docs/methodology.md)
+[**Slide Thuyết Trình Chung Kết (PDF)**](deliverables/slides/MDS_FUU_Final_Deck_V3.pdf) • [**Dashboard Tương Tác (HTML)**](dashboards/brand_funnel_interactive.html) • [**Báo Cáo Xử Lý Dữ Liệu (MD)**](docs/methodology.md)
 
 </div>
 
