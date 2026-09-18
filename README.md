@@ -44,7 +44,7 @@
 Dự án này là toàn bộ kho lưu trữ mã nguồn, dữ liệu, tài liệu phân tích thị trường và sản phẩm dự thi của **Đội thi FUU** tham gia cuộc thi **myInsight - MDS Datathon Challenge 2026** do [CLB Khoa học Dữ liệu MDS](https://www.facebook.com/MDS.Ftu2) - [Trường Đại học Ngoại Thương Cơ sở II (FTU2)](https://www.facebook.com/ftuhcmcity) tổ chức vào **Tháng 6/2026**.
 
 - **Đề tài**: *Brand Health Tracking & Growth Acceleration for Cozy Ready-to-Drink (RTD) Tea in Vietnam Market (2024–2026)*.
-- **Thành tích**: **1st RUNNER-UP (Á QUÂN TOÀN QUỐC)**.
+- **Thành tích**: **1st RUNNER-UP**.
 - **Hình ảnh vinh danh**: [Xem ảnh đội thi trên Fanpage chính thức của FTU2](https://www.facebook.com/photo/?fbid=1332448379013847&set=a.609148298010529).
 
 <br/>
